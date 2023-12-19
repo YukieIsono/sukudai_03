@@ -12,6 +12,10 @@ df.head()
 df = df.drop(columns = ['Unnamed: 0'])
 df.head()
 
+import matplotlib.pyplot as plt
+X = df.drop('住宅価格', axis=1)
+y = df['住宅価格']
+
 from sklearn.model_selection import train_test_split
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=0)
 
@@ -24,9 +28,7 @@ model.fit(X_train, y_train)
 std_dev = np.std(X_train, axis=0)
 coefficients_original_scale = model.coef_ * std_dev
 
-import matplotlib.pyplot as plt
-X = df.drop('住宅価格', axis=1)
-y = df['住宅価格']
+
 
 plt.figure(figsize=(10,6))
 plt.bar(range(len(coefficients_original_scale)), coefficients_original_scale)
